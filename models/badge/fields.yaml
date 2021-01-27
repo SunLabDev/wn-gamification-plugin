@@ -1,0 +1,17 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+      label: Name
+      type: text
+    description:
+      label: Description
+      type: text
+    amount_needed:
+      label: Amount needed
+      type: number
+    measure_name:
+      label: Measure name
+      type: text

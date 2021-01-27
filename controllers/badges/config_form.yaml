@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Badge
+
+# Model Form Field configuration
+form: $/sunlab/badges/models/badge/fields.yaml
+
+# Model Class name
+modelClass: SunLab\Badges\Models\Badge
+
+# Default redirect location
+defaultRedirect: sunlab/badges/badges
+
+# Create page
+create:
+    title: Create Badge
+    redirect: sunlab/badges/badges/update/:id
+    redirectClose: sunlab/badges/badges
+
+# Update page
+update:
+    title: Edit Badge
+    redirect: sunlab/badges/badges
+    redirectClose: sunlab/badges/badges
+
+# Preview page
+preview:
+    title: Preview Badge
