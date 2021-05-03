@@ -1,12 +1,17 @@
 <?php namespace SunLab\Badges\Components;
 
 use Cms\Classes\ComponentBase;
+use Winter\User\Models\User;
 
 class UserBadges extends ComponentBase
 {
-    public function init()
-    {
+    public $badges = [];
 
+    public function onRun()
+    {
+        $userId = $this->property('user-id');
+        $user = User::find($userId);
+        $this->badges = $user->badges;
     }
 
     public function componentDetails()
@@ -20,14 +25,12 @@ class UserBadges extends ComponentBase
     public function defineProperties()
     {
         return [
-            'max' => [
-                'description'       => 'The most amount of todo items allowed',
-                'title'             => 'Max items',
-                'default'           => true,
-                'type'              => 'boolean',
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'The Max Items value is required and should be integer.'
-            ]
+            'user-id' => [
+                'title'       => 'sunlab.badges::lang.components.user_id',
+                'description' => 'sunlab.badges::lang.components.user_id_description',
+                'default'     => '{{ :id }}',
+                'type'        => 'string',
+            ],
         ];
     }
 }

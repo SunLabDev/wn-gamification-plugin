@@ -1,3 +1,11 @@
-{% set user = __SELF__.user %}
-
-{{ user.name }}
+{% set badges = __SELF__.badges %}
+<h3>Badges</h3>
+{% if badges is not empty %}
+<ul>
+    {% for badge in badges %}
+    <li>{{ badge.name }} - <i>{{ badge.description }}</i></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No badge yet</p>
+{% endif %}
