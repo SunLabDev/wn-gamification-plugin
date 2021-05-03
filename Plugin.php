@@ -59,10 +59,9 @@ class Plugin extends PluginBase
 
     public function registerComponents()
     {
-        return []; // Remove this line to activate
-
         return [
-            'SunLab\Badges\Components\MyComponent' => 'myComponent',
+            \SunLab\Badges\Components\BadgesList::class => 'badgesList',
+            \SunLab\Badges\Components\UserBadges::class => 'userBadges',
         ];
     }
 
