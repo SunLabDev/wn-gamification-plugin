@@ -4,7 +4,7 @@ use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 
-class CreateBadgesTable extends Migration
+class CreateBadgesUsersTable extends Migration
 {
     public function up()
     {
