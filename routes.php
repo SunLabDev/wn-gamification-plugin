@@ -7,10 +7,10 @@ Route::get('/test-plugin', function() {
   $user = User::first();
 
   // Tu incrément une mesure bidon
-  $measure = $user->incrementMeasure('badge_1_mesure');
+  $measure = $user->incrementMeasure('talk');
+  $measure = $user->incrementMeasure('like');
 
 
   // Tu affiche la mesure et les badges du user
-  dump($measure); // Peut être tu devra accéder à ->amount pour afficher le nb, pas testé
   dd($user->badges);
 });
