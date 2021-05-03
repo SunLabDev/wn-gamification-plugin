@@ -62,6 +62,7 @@ class Plugin extends PluginBase
         return [
             \SunLab\Badges\Components\BadgesList::class => 'badgesList',
             \SunLab\Badges\Components\UserBadges::class => 'userBadges',
+            \SunLab\Badges\Components\SelfBadges::class => 'selfBadges',
         ];
     }
 

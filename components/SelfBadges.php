@@ -2,7 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 
-class UserBadges extends ComponentBase
+class SelfBadges extends ComponentBase
 {
     public function init()
     {
