@@ -1,7 +1,7 @@
 <?php namespace SunLab\Badges\Models;
 
 use Model;
-use RainLab\User\Models\User;
+use Winter\User\Models\User;
 
 /**
  * Badge Model

@@ -3,7 +3,7 @@
 use Backend;
 use Event;
 use System\Classes\PluginBase;
-use RainLab\User\Models\User;
+use Winter\User\Models\User;
 use SunLab\Badges\Models\Badge;
 use System\Classes\SettingsManager;
 
@@ -13,7 +13,7 @@ use System\Classes\SettingsManager;
 class Plugin extends PluginBase
 {
     public $require = [
-        'RainLab.User',
+        'Winter.User',
         'SunLab.Measures'
     ];
 
@@ -48,13 +48,13 @@ class Plugin extends PluginBase
      * @return array
      */
     public function boot() {
-        
+
         User::extend(function($user) {
             $user->belongsToMany['badges'] = [Badge::class, 'table' => 'sunlab_badges_badges_users'];
 
             if (!$user->isClassExtendedWith('SunLab.Measures.Behaviors.Measurable')) {
                 $user->extendClassWith('SunLab.Measures.Behaviors.Measurable');
-            }         
+            }
         });
 
 
@@ -62,7 +62,7 @@ class Plugin extends PluginBase
             if (!$model instanceof User) {
                 return;
             }
-            
+
             $correspondingBadges =
                 Badge::where([['measure_name', $measure->name], ['amount_needed', '<=',  $measure->amount]])
                     ->whereDoesntHave('users', function ($query) use ($model) {
