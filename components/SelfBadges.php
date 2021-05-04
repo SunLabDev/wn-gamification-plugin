@@ -15,8 +15,8 @@ class SelfBadges extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'UserBadges Component',
-            'description' => 'No description provided yet...'
+            'name'        => 'sunlab.badges::lang.components.self_badge',
+            'description' => 'sunlab.badges::lang.components.self_badge_description'
         ];
     }
 }

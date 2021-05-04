@@ -17,8 +17,8 @@ class UserBadges extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'UserBadges Component',
-            'description' => 'No description provided yet...'
+            'name'        => 'sunlab.badges::lang.components.user_badge',
+            'description' => 'sunlab.badges::lang.components.user_badge_description'
         ];
     }
 

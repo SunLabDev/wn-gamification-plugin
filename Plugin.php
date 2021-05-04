@@ -20,8 +20,8 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name' => 'Badges',
-            'description' => 'No description provided yet...',
+            'name' => 'sunlab.badges::lang.details.name',
+            'description' => 'sunlab.badges::lang.details.description',
             'author' => 'SunLab',
             'icon' => 'icon-leaf'
         ];
@@ -70,7 +70,7 @@ class Plugin extends PluginBase
     {
         return [
             'location' => [
-                'label' => 'Badges',
+                'label' => 'sunlab.badges::lang.settings.name',
                 'description' => 'sunlab.badges::lang.settings.description',
                 'category' => SettingsManager::CATEGORY_USERS,
                 'icon' => 'icon-space-shuttle',
@@ -87,8 +87,8 @@ class Plugin extends PluginBase
 
         return [
             'sunlab.badges.some_permission' => [
-                'tab' => 'Badges',
-                'label' => 'Some permission'
+                'tab' => 'sunlab.badges::lang.settings.name',
+                'label' => 'sunlab.badges::lang.permissions.label'
             ],
         ];
     }

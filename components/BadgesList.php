@@ -15,8 +15,8 @@ class BadgesList extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'BadgesList Component',
-            'description' => 'No description provided yet...'
+            'name'        => 'sunlab.badges::lang.components.badge_list',
+            'description' => 'sunlab.badges::lang.components.badge_list_description'
         ];
     }
 }
