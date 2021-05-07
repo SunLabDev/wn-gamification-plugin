@@ -1,4 +1,4 @@
-<?php namespace SunLab\Badges\Updates;
+<?php namespace SunLab\Gamification\Updates;
 
 use Schema;
 use October\Rain\Database\Schema\Blueprint;
@@ -8,7 +8,7 @@ class CreateBadgesUsersTable extends Migration
 {
     public function up()
     {
-        Schema::create('sunlab_badges_badges_users', function (Blueprint $table) {
+        Schema::create('sunlab_gamification_badges_users', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->timestamps();
             $table->integer('user_id')->unsigned();
@@ -18,6 +18,6 @@ class CreateBadgesUsersTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('sunlab_badges_badges');
+        Schema::dropIfExists('sunlab_gamification_badges');
     }
 }

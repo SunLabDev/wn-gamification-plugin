@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/sunlab/badges/models/badge/columns.yaml
+list: $/sunlab/gamification/models/badge/columns.yaml
 
 # Model Class name
-modelClass: SunLab\Badges\Models\Badge
+modelClass: SunLab\Gamification\Models\Badge
 
 # List Title
 title: Manage Badges
 
 # Link URL for each record
-recordUrl: sunlab/badges/badges/update/:id
+recordUrl: sunlab/gamification/badges/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

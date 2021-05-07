@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('sunlab/badges/badges') ?>">Badges</a></li>
+        <li><a href="<?= Backend::url('sunlab/gamification/badges') ?>">Badges</a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
@@ -43,7 +43,7 @@
                     data-request-confirm="Delete this badge?">
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('sunlab/badges/badges') ?>">Cancel</a>
+                    or <a href="<?= Backend::url('sunlab/gamification/badges') ?>">Cancel</a>
                 </span>
             </div>
         </div>
@@ -53,6 +53,6 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('sunlab/badges/badges') ?>" class="btn btn-default">Return to badges list</a></p>
+    <p><a href="<?= Backend::url('sunlab/gamification/badges') ?>" class="btn btn-default">Return to badges list</a></p>
 
 <?php endif ?>

@@ -1,10 +1,10 @@
-<?php namespace SunLab\Badges;
+<?php namespace SunLab\Gamification;
 
 use Backend;
 use Event;
 use System\Classes\PluginBase;
 use Winter\User\Models\User;
-use SunLab\Badges\Models\Badge;
+use SunLab\Gamification\Models\Badge;
 use System\Classes\SettingsManager;
 
 /**
@@ -20,17 +20,17 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name' => 'sunlab.badges::lang.details.name',
-            'description' => 'sunlab.badges::lang.details.description',
+            'name' => 'sunlab.gamification::lang.details.name',
+            'description' => 'sunlab.gamification::lang.details.description',
             'author' => 'SunLab',
-            'icon' => 'icon-leaf'
+            'icon' => 'icon-trophy'
         ];
     }
 
     public function boot()
     {
         User::extend(function ($user) {
-            $user->belongsToMany['badges'] = [Badge::class, 'table' => 'sunlab_badges_badges_users'];
+            $user->belongsToMany['badges'] = [Badge::class, 'table' => 'sunlab_gamification_badges_users'];
 
             if (!$user->isClassExtendedWith('SunLab.Measures.Behaviors.Measurable')) {
                 $user->extendClassWith('SunLab.Measures.Behaviors.Measurable');
@@ -49,20 +49,25 @@ class Plugin extends PluginBase
                         $query->where('user_id', $model->id);
                     })->get();
 
-            if (blank($correspondingBadges)) {
-                return;
-            }
+            if (!blank($correspondingBadges)) {
+                // Because multiple attach doesn't fill created events
+                // We need to manually set the timestamps
+                $now = now();
+                $attachedBadges = array_combine(
+                    $correspondingBadges->pluck('id')->toArray(),
+                    array_fill(0, count($correspondingBadges), ['updated_at' => $now, 'created_at' => $now])
+                );
 
-            $model->badges()->attach($correspondingBadges->pluck('id'));
+                $model->badges()->attach($attachedBadges);
+            }
         });
     }
 
     public function registerComponents()
     {
         return [
-            \SunLab\Badges\Components\BadgesList::class => 'badgesList',
-            \SunLab\Badges\Components\UserBadges::class => 'userBadges',
-            \SunLab\Badges\Components\SelfBadges::class => 'selfBadges',
+            \SunLab\Gamification\Components\BadgesList::class => 'badgesList',
+            \SunLab\Gamification\Components\UserBadges::class => 'userBadges',
         ];
     }
 
@@ -70,12 +75,13 @@ class Plugin extends PluginBase
     {
         return [
             'location' => [
-                'label' => 'sunlab.badges::lang.settings.name',
-                'description' => 'sunlab.badges::lang.settings.description',
+                'label' => 'sunlab.gamification::lang.settings.name',
+                'description' => 'sunlab.gamification::lang.settings.description',
                 'category' => SettingsManager::CATEGORY_USERS,
-                'icon' => 'icon-space-shuttle',
-                'url' => Backend::url('sunlab/badges/badges'),
+                'icon' => 'icon-trophy',
+                'url' => Backend::url('sunlab/gamification/badges'),
                 'order' => 500,
+                'permissions' => ['sunlab.gamification.manage_badges'],
                 'keywords' => 'geography place placement'
             ]
         ];
@@ -83,12 +89,10 @@ class Plugin extends PluginBase
 
     public function registerPermissions()
     {
-        return []; // Remove this line to activate
-
         return [
-            'sunlab.badges.some_permission' => [
-                'tab' => 'sunlab.badges::lang.settings.name',
-                'label' => 'sunlab.badges::lang.permissions.label'
+            'sunlab.gamification.manage_badges' => [
+                'tab' => 'sunlab.gamification::lang.settings.name',
+                'label' => 'sunlab.gamification::lang.permissions.label'
             ],
         ];
     }

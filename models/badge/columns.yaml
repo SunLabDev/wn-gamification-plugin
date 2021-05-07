@@ -1,4 +1,8 @@
 columns:
     name:
-      label: Name
+      label: sunlab.gamification::lang.fields.name
+      searchable: true
+
+    description:
+      label: sunlab.gamification::lang.fields.description
       searchable: true

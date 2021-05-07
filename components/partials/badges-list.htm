@@ -1,0 +1,14 @@
+{% set badges = __SELF__.badges %}
+
+<h3>Badges</h3>
+{% if badges is not empty %}
+    <div class="badges-list">
+        {% for badge in badges %}
+            {% partial '@badge.htm' badge=badge %}
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No badge yet</p>
+{% endif %}
+
+

@@ -6,25 +6,25 @@
 name: Badge
 
 # Model Form Field configuration
-form: $/sunlab/badges/models/badge/fields.yaml
+form: $/sunlab/gamification/models/badge/fields.yaml
 
 # Model Class name
-modelClass: SunLab\Badges\Models\Badge
+modelClass: SunLab\Gamification\Models\Badge
 
 # Default redirect location
-defaultRedirect: sunlab/badges/badges
+defaultRedirect: sunlab/gamification/badges
 
 # Create page
 create:
     title: Create Badge
-    redirect: sunlab/badges/badges/update/:id
-    redirectClose: sunlab/badges/badges
+    redirect: sunlab/gamification/badges/update/:id
+    redirectClose: sunlab/gamification/badges
 
 # Update page
 update:
     title: Edit Badge
-    redirect: sunlab/badges/badges
-    redirectClose: sunlab/badges/badges
+    redirect: sunlab/gamification/badges
+    redirectClose: sunlab/gamification/badges
 
 # Preview page
 preview:

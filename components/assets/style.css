@@ -1,0 +1,37 @@
+.badges-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.33%;
+    row-gap: 10px;
+}
+
+.badges-list .badge {
+    position: relative;
+    display: flex;
+    flex-basis: 24%;
+    height: 100px;
+    background: transparent;
+    color: black;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid gray;
+}
+
+.badges-list .badge .badge-text {
+    flex-basis: 75%;
+}
+
+.badges-list .badge .badge-image {
+    flex-basis: 25%;
+    max-height: 90%;
+}
+
+.badges-list .badge .bubble {
+    position:absolute;
+    right: 10px;
+    top: -10px;
+    padding: 5px;
+    background-color: white;
+    border:1px solid black;
+    border-radius: 50px;
+}

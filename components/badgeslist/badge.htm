@@ -1,0 +1,12 @@
+<div class="badge">
+    {% if badge.image is not null %}
+    <img src="{{ badge.image.path }}" alt="" class="badge-image">
+    {% endif %}
+    <div class="badge-text">
+        <h5>{{ badge.name }}</h5>
+        <p>{{ badge.description }}</p>
+    </div>
+    {% if badge.users_count %}
+    <div class="bubble">{{ badge.users_count }} users</div>
+    {% endif %}
+</div>

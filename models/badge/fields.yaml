@@ -1,13 +1,22 @@
 fields:
     name:
-      label: sunlab.badges::lang.fields.name
-      type: text
-    description:
-      label: sunlab.badges::lang.fields.description
-      type: text
-    amount_needed:
-      label: sunlab.badges::lang.fields.amount_needed
-      type: number
+      label: sunlab.gamification::lang.fields.name
+      span: left
+
     measure_name:
-      label: sunlab.badges::lang.fields.measure_name
-      type: text
+        label: sunlab.gamification::lang.fields.measure_name
+        cssClass: w-sm p-l m-l
+
+    amount_needed:
+        label: sunlab.gamification::lang.fields.amount_needed
+        type: number
+        cssClass: w-sm p-l
+
+    description:
+      label: sunlab.gamification::lang.fields.description
+      span: left
+
+    image:
+        label: sunlab.gamification::lang.fields.image
+        type: fileupload
+        cssClass: w-sm p-l m-l-md

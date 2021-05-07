@@ -1,6 +1,6 @@
 <?php return [
     'details' => [
-        'name' => 'Badges',
+        'name' => 'Gamification',
         'description' => 'Gestion des badges pour vos utilisateurs'
     ],
     'settings' => [
