@@ -15,7 +15,7 @@ Displays all the badge that can be rewarded,
 and the number of members of member who already won it.
 
 #### UserBadges
-Displays only the badges that a specific member have won.
+Displays only the badges that a specific member won.
 The member could be the one actually logged in, or set by an url parameter.
 
 ### Tree view
@@ -28,7 +28,7 @@ use the components' property `tree-displayed` to optimize the database search.
 ### Measures reminder
 [SunLab.Measures](https://github.com/sunlabdev/measures) is internally used by the plugin to increment
 some measures when some events are emitted.
-You can configure the most basics event from the backend using the generic event listener of `Measures`,
+You can configure the most basic events from the backend using the generic event listener of `Measures`,
 but for complexes cases, you'll need to manually create the listener from a `Plugin.php` file.
 
 A use case for this could be to give a badge rewarding immediately after the registration,
