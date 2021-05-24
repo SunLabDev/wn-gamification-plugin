@@ -1,8 +1,8 @@
 <?php namespace SunLab\Gamification;
 
-use Backend;
-use Event;
+use Backend\Facades\Backend;
 use System\Classes\PluginBase;
+use Winter\Storm\Support\Facades\Event;
 use Winter\User\Models\User;
 use SunLab\Gamification\Models\Badge;
 use System\Classes\SettingsManager;
