@@ -18,6 +18,6 @@ class CreateBadgesUsersTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('sunlab_gamification_badges');
+        Schema::dropIfExists('sunlab_gamification_badges_users');
     }
 }
