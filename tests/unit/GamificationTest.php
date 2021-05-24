@@ -1,8 +1,7 @@
-<?php namespace Winter\User\Tests\Unit\Facades;
+<?php namespace SunLab\Gamification\Tests\Unit\Facades;
 
 use SunLab\Gamification\Models\Badge;
 use SunLab\Gamification\Tests\GamificationPluginTestCase;
-use Winter\User\Models\User;
 
 class GamificationTest extends GamificationPluginTestCase
 {
