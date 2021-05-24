@@ -1,41 +1,88 @@
 <?php namespace Winter\User\Tests\Unit\Facades;
 
-use Backend\Models\User;
-use SunLab\Measures\Models\ListenedEvent;
-use SunLab\Measures\Tests\MeasuresPluginTestCase;
+use SunLab\Gamification\Models\Badge;
+use SunLab\Gamification\Tests\GamificationPluginTestCase;
+use Winter\User\Models\User;
 
-class MeasuresTest extends MeasuresPluginTestCase
+class GamificationTest extends GamificationPluginTestCase
 {
-    public function testIncrementingMeasuresFromAnEvent()
+    public function testBadgeIsAssignedWhenGoalIsReached()
     {
-        User::extend(function ($model) {
-            $model->bindEvent('model.afterUpdate', function () use ($model) {
-                $model->incrementMeasure('user_updated');
-            });
-        });
+        $this->createUndecidedBadge();
 
-        $this->createUser();
+        // Update the model 5 times
+        for ($i = 1; $i <= 5; $i++) {
+            $this->user->email = "other-email${i}@test.com";
+            $this->user->save();
 
-        $this->user->email = 'other-email@test.com';
-        $this->user->save();
+            // On the 4th updates, asserts it doesn't have the badge yet
+            if ($i === 4) {
+                $this->assertEmpty($this->user->badges->toArray());
+            }
+        }
 
-        $this->assertEquals(1, $this->user->getAmountOf('user_updated'));
+        $this->user->load('badges');
+        $this->assertNotEmpty($this->user->badges->toArray());
+        $this->assertEquals('Undecided', $this->user->badges()->first()->name);
     }
 
-    public function testIncrementingMeasuresFromAListenedEvent()
+    public function testBadgesAreAssignedWithMeasuresRetroCompatibility()
     {
-        $listenedEvent = new ListenedEvent;
-        $listenedEvent->event_name = 'model.afterUpdate';
-        $listenedEvent->measure_name = 'user_updated';
-        $listenedEvent->model_to_watch = User::class;
-        $listenedEvent->save();
+        // Update the model more times than needed to get the badge
+        for ($i = 1; $i <= 6; $i++) {
+            $this->user->email = "other-email${i}@test.com";
+            $this->user->save();
+        }
 
-        $this->getPluginObject()->boot();
+        // Badge is not created yet, it's forcefully empty
+        $this->assertEmpty($this->user->badges->toArray());
 
-        $this->createUser();
-        $this->user->email = 'other-email@test.com';
+        // Create the badge and update one more time, the badge should be attached
+        $this->createUndecidedBadge();
+
+        $this->user->email = "other-email7@test.com";
         $this->user->save();
 
-        $this->assertEquals(1, $this->user->getAmountOf('user_updated'));
+        $this->user->load('badges');
+        $this->assertNotEmpty($this->user->badges->toArray());
+        $this->assertEquals('Undecided', $this->user->badges()->first()->name);
+    }
+
+    public function testBadgesCanBeAttachedMultipleAtOnce()
+    {
+        // Update the model 9 times than needed to get the badge
+        for ($i = 1; $i <= 9; $i++) {
+            $this->user->email = "other-email${i}@test.com";
+            $this->user->save();
+        }
+
+        // Badge is not created yet, it's forcefully empty
+        $this->assertEmpty($this->user->badges->toArray());
+
+        // Create two badges and update one more time, the badges should be attached
+        $this->createUndecidedBadge();
+
+        $badge = new Badge;
+        $badge->name = 'Really Undecided';
+        $badge->measure_name = $this->listenedEvent->measure_name;
+        $badge->amount_needed = 10;
+        $badge->save();
+
+        $this->user->email = "other-email10@test.com";
+        $this->user->save();
+
+        $this->user->load('badges');
+        $this->assertNotEmpty($this->user->badges->toArray());
+        $this->assertEquals(2, $this->user->badges()->count());
+    }
+
+    // Create a badge which should be assigned when a User model is updated 5 times
+    protected function createUndecidedBadge()
+    {
+        $badge = new Badge;
+        $badge->name = 'Undecided';
+        $badge->measure_name = $this->listenedEvent->measure_name;
+        $badge->amount_needed = 5;
+        $badge->save();
     }
 }

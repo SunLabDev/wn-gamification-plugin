@@ -1,31 +1,32 @@
-<?php namespace SunLab\Measures\Tests;
+<?php namespace SunLab\Gamification\Tests;
 
-use Backend\Facades\BackendAuth;
-use Backend\Models\User;
+use SunLab\Measures\Models\ListenedEvent;
 use PluginTestCase;
+use Winter\User\Facades\Auth;
 
-abstract class MeasuresPluginTestCase extends PluginTestCase
+abstract class GamificationPluginTestCase extends PluginTestCase
 {
-    protected $refreshPlugins = [
-        'SunLab.Measures',
-    ];
-
     protected $user;
+    protected $listenedEvent;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        User::extend(function ($user) {
-            $user->extendClassWith('SunLab.Measures.Behaviors.Measurable');
-        });
-    }
+        // Create a base listened event for the tests
+        $this->listenedEvent = new ListenedEvent;
+        $this->listenedEvent->event_name = 'model.afterUpdate';
+        $this->listenedEvent->measure_name = 'user_updated';
+        $this->listenedEvent->model_to_watch = \Winter\User\Models\User::class;
+        $this->listenedEvent->save();
 
-    // Create a base model
-    protected function createUser()
-    {
-        $this->user = BackendAuth::register([
-            'login' => 'username',
+        $this->getPluginObject('SunLab.Measures')->boot();
+
+        $this->getPluginObject()->boot();
+
+        // Create a base use model for the tests
+        $this->user = Auth::register([
+            'username' => 'username',
             'email' => 'user@user.com',
             'password' => 'abcd1234',
             'password_confirmation' => 'abcd1234'

@@ -13,8 +13,6 @@
 >
   <coverage processUncoveredFiles="true">
     <include>
-      <directory suffix=".php">./classes</directory>
-      <directory suffix=".php">./behaviors</directory>
       <directory suffix=".php">./controllers</directory>
       <directory suffix=".php">./models</directory>
     </include>
@@ -25,7 +23,7 @@
     </exclude>
   </coverage>
   <testsuites>
-    <testsuite name="sunlab.measures">
+    <testsuite name="sunlab.gamification">
       <directory>./tests</directory>
     </testsuite>
   </testsuites>
