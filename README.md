@@ -1,11 +1,11 @@
 ## Gamification
 This plugin allows you to reward your members when some actions are made.
-To increment the statistics, this plugin is using [SunLab.Measures](https://github.com/sunlabdev/measures)
+To increment the statistics, this plugin is using [SunLab.Measures](https://github.com/sunlabdev/wn-measures-plugin)
 
 ### How to use
 From the backend, create all the needed badges.
 A badge need at least, a name,
-a measure name corresponding to one previously set with [SunLab.Measures](https://github.com/sunlabdev/measures),
+a measure name corresponding to one previously set with [SunLab.Measures](https://github.com/sunlabdev/wn-measures-plugin),
 and the amount needed to win the badge.
 
 ### Components
@@ -26,7 +26,7 @@ use the components' property `tree-displayed` to optimize the database search.
 *The default query will load the badges ordered by their measure name and amount needed.*
 
 ### Measures reminder
-[SunLab.Measures](https://github.com/sunlabdev/measures) is internally used by the plugin to increment
+[SunLab.Measures](https://github.com/sunlabdev/wn-measures-plugin) is internally used by the plugin to increment
 some measures when some events are emitted.
 You can configure the most basic events from the backend using the generic event listener of `Measures`,
 but for complexes cases, you'll need to manually create the listener from a `Plugin.php` file.
