@@ -24,20 +24,22 @@ class Badges extends Controller
         SettingsManager::setContext('SunLab.Gamification', 'settings');
     }
 
-    // Search for an eventual parent to link before save
-    public function formBeforeSave($model)
+    // Rebuild the CollectionTree
+    public function formAfterSave($model)
     {
-        $correspondingParentBadge = Badge::query()
-                                         ->select('id')
-                                         ->where([
-                                             ['measure_name', '=', $model->measure_name],
-                                             ['amount_needed', '<', $model->amount_needed]
-                                         ])
-                                         ->orderByDesc('amount_needed')
-                                         ->first();
+        $badgeOfSameMeasure =
+            Badge::query()->where('measure_name', $model->measure_name)
+                          ->orderBy('amount_needed')
+                          ->get();
 
-        if ($correspondingParentBadge) {
-            $model->parent_id = $correspondingParentBadge->id;
-        }
+        $badgeOfSameMeasure->each(function ($item, $key) use ($badgeOfSameMeasure) {
+            if ($key === 0) {
+                $item->parent_id = null;
+            } else {
+                $item->parent_id = $badgeOfSameMeasure[$key-1]->id;
+            }
+
+            $item->save();
+        });
     }
 }
