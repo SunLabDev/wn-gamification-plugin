@@ -19,8 +19,8 @@
     "require": {
         "php": ">=7.0",
         "composer/installers": "~1.0",
-        "sunlab/wn-measures-plugin": "v1.x",
-        "winter/wn-user-plugin": "v2.x"
+        "sunlab/wn-measures-plugin": "^v1.0.0",
+        "winter/wn-user-plugin": "dev-main"
     },
     "extra": {
         "installer-name": "gamification"
