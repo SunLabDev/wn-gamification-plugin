@@ -1,11 +1,5 @@
 1.0.1:
   - First version of Gamification
-1.0.2:
-  - add fields to the Badges model
-1.0.3:
-  - migrations
   - create_badges_table.php
-1.0.4:
-  - create badges users table
   - create_badges_users_table.php
 
