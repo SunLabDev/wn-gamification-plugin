@@ -18,7 +18,8 @@
     },
     "require": {
         "php": ">=7.0",
-        "composer/installers": "~1.0"
+        "composer/installers": "~1.0",
+        "sunlabdev/wn-measures-plugin": "dev-main"
     },
     "extra": {
         "installer-name": "gamification"
