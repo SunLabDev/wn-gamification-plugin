@@ -1,7 +1,7 @@
 <?php namespace SunLab\Gamification\Tests;
 
 use SunLab\Measures\Models\ListenedEvent;
-use PluginTestCase;
+use System\Tests\Bootstrap\PluginTestCase;
 use Winter\User\Facades\Auth;
 
 abstract class GamificationPluginTestCase extends PluginTestCase
