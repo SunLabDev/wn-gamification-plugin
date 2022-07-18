@@ -17,9 +17,7 @@ class Badge extends Model
     protected $guarded = ['*'];
 
     public $rules = [
-        'name' => 'required',
-        'measure_name' => 'required',
-        'amount_needed' => 'required',
+        'name' => 'required'
     ];
 
     protected $dates = [
