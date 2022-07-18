@@ -27,6 +27,10 @@ class Badges extends Controller
     // Rebuild the CollectionTree
     public function formAfterSave($model)
     {
+        if (empty($model->measure_name)) {
+            return;
+        }
+
         $badgeOfSameMeasure =
             Badge::query()->where('measure_name', $model->measure_name)
                           ->orderBy('amount_needed')
