@@ -25,7 +25,7 @@ class GamificationTest extends GamificationPluginTestCase
         $this->assertEquals('Undecided', $this->user->badges()->first()->name);
     }
 
-    public function testBadgesAreAssignedWithMeasuresRetroCompatibility()
+    public function testBadgesAreAssignedWithMeasuresBackwardCompatibility()
     {
         // Update the model more times than needed to get the badge
         for ($i = 1; $i <= 6; $i++) {
@@ -73,6 +73,18 @@ class GamificationTest extends GamificationPluginTestCase
         $this->user->load('badges');
         $this->assertNotEmpty($this->user->badges->toArray());
         $this->assertEquals(2, $this->user->badges()->count());
+    }
+
+    public function testCanAttachAndDetachBadgeDirectly()
+    {
+        $this->createUndecidedBadge();
+
+        $this->user->attachBadge('Undecided');
+        $this->user->load('badges');
+        $this->assertEquals('Undecided', $this->user->badges()->first()->name);
+
+        $this->user->detachBadge('Undecided');
+        $this->assertEquals(0, $this->user->badges()->count());
     }
 
     // Create a badge which should be assigned when a User model is updated 5 times

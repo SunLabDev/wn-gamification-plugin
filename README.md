@@ -4,9 +4,31 @@ To increment the statistics, this plugin is using [SunLab.Measures](https://gith
 
 ### How to use
 From the backend, create all the needed badges.
-A badge need at least, a name,
-a measure name corresponding to one previously set with [SunLab.Measures](https://github.com/sunlabdev/wn-measures-plugin),
-and the amount needed to win the badge.
+A badge need at least, a name.
+
+#### Automatic attachment with [SunLab.Measures](https://github.com/sunlabdev/wn-measures-plugin)
+When filling measure name and amount needed: the users will automatically receive badges once the measure reach the amount needed.
+Refer to [SunLab.Measures](https://github.com/sunlabdev/wn-measures-plugin) for measure incrementation.
+
+#### Manually attaching/detaching badge
+To attach or detach a badge manually, use `attachBadge` and `detachBadge` method,
+which accept a badge reference as string (its name), int (its id), or a Badge model.
+```php
+\Winter\User\Models\User::extend(function ($user) {
+    Event::listen('winter.user.activate', function($user) {
+        $user->attachBadge('Verified User');
+    });
+});
+```
+
+#### Verify badge attachment
+To simplify badge attachment verification, the plugin include a `hasBadge` method,
+which accept a badge reference as string (its name), int (its id), or a Badge model.
+```php
+if ($user->haBadge('Verified User')) {
+    // User has the 'Verified User' badge
+}
+```
 
 ### Components
 This plugin comes with two components:

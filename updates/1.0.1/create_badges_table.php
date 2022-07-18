@@ -1,8 +1,8 @@
 <?php namespace SunLab\Gamification\Updates;
 
-use Schema;
-use October\Rain\Database\Schema\Blueprint;
-use October\Rain\Database\Updates\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Winter\Storm\Support\Facades\Schema;
+use Winter\Storm\Database\Updates\Migration;
 
 class CreateBadgesTable extends Migration
 {

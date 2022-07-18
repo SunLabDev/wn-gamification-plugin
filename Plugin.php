@@ -30,13 +30,32 @@ class Plugin extends PluginBase
     public function boot()
     {
         User::extend(function ($user) {
-            $user->belongsToMany['badges'] = [Badge::class, 'table' => 'sunlab_gamification_badges_users'];
-
             if (!$user->isClassExtendedWith('SunLab.Measures.Behaviors.Measurable')) {
                 $user->extendClassWith('SunLab.Measures.Behaviors.Measurable');
             }
-        });
 
+            $user->belongsToMany['badges'] = [Badge::class, 'table' => 'sunlab_gamification_badges_users'];
+
+            $user->addDynamicMethod('attachBadge', function ($badgeRef) use ($user) {
+                if ($badgeId = $this->getBadgeIdFromBadgeRef($badgeRef)) {
+                    $user->badges()->attach($badgeId);
+                }
+            });
+
+            $user->addDynamicMethod('detachBadge', function ($badgeRef) use ($user) {
+                if ($badgeId = $this->getBadgeIdFromBadgeRef($badgeRef)) {
+                    $user->badges()->detach($badgeId);
+                }
+            });
+
+            $user->addDynamicMethod('hasBadge', function ($badgeRef) use ($user) {
+                if ($badgeId = $this->getBadgeIdFromBadgeRef($badgeRef)) {
+                    return $user->badges()->where('id', $badgeId)->exists();
+                }
+
+                return false;
+            });
+        });
 
         Event::listen('sunlab.measures.incrementMeasure', function ($model, $measure) {
             if (!$model instanceof User) {
@@ -95,5 +114,20 @@ class Plugin extends PluginBase
                 'label' => 'sunlab.gamification::lang.permissions.label'
             ],
         ];
+    }
+
+    protected function getBadgeIdFromBadgeRef($badgeRef): ?int
+    {
+        $badgeId = null;
+
+        if (is_string($badgeRef)) {
+            $badgeId = Badge::query()->firstWhere('name', $badgeRef)->id;
+        } elseif (is_int($badgeRef)) {
+            $badgeId = $badgeRef;
+        } elseif ($badgeRef instanceof Badge) {
+            $badgeId = $badgeRef->id;
+        }
+
+        return $badgeId;
     }
 }

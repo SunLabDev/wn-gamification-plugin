@@ -1,5 +1,7 @@
 1.0.1:
   - First version of Gamification
-  - create_badges_table.php
-  - create_badges_users_table.php
-
+  - 1.0.1/create_badges_table.php
+  - 1.0.1/create_badges_users_table.php
+1.0.2:
+    - Add the possibility to attach/detach badge directly without any measurement
+    - 1.0.2/set_badge_measure_nullable.php
